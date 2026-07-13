@@ -1,0 +1,46 @@
+﻿@import "tailwindcss";
+
+/* --- CSS custom properties — black & gray palette ----------------------- */
+:root {
+  --background: #080808;
+  --foreground: #e5e5e5;
+
+  --primary: #d4d4d4;
+  --primary-foreground: #080808;
+
+  --muted: #171717;
+  --muted-foreground: #525252;
+
+  --card: #111111;
+  --card-foreground: #e5e5e5;
+
+  --border: #262626;
+}
+
+/* --- Tailwind v4 theme mapping ------------------------------------------- */
+@theme inline {
+  --color-background:         var(--background);
+  --color-foreground:         var(--foreground);
+  --color-primary:            var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted:              var(--muted);
+  --color-muted-foreground:   var(--muted-foreground);
+  --color-card:               var(--card);
+  --color-card-foreground:    var(--card-foreground);
+  --color-border:             var(--border);
+
+  --font-sans:  var(--font-geist-sans);
+  --font-mono:  var(--font-geist-mono);
+  --font-serif: var(--font-playfair);
+}
+
+/* --- Base ---------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
