@@ -1,51 +1,93 @@
 import Link from "next/link";
+import Image from "next/image";
+
+const pages = [
+  ["Home",     "/"],
+  ["About",    "/about"],
+  ["Services", "/services"],
+  ["Demos",    "/demos"],
+  ["Pricing",  "/pricing"],
+  ["Contact",  "/contact"],
+];
+
+const services = [
+  "Business Websites",
+  "WhatsApp Automation",
+  "Booking Systems",
+  "CRM & Tracking",
+  "Inventory Systems",
+  "Custom AI Tools",
+];
 
 export default function Footer() {
   return (
-    <footer className="bg-[#080808] border-t border-white/[0.05]">
-      <div className="max-w-6xl mx-auto px-5 sm:px-8 py-14">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+    <footer className="bg-black border-t border-white/[0.07] relative overflow-hidden">
+      {/* Grid texture */}
+      <div className="absolute inset-0 grid-bg opacity-40 pointer-events-none" aria-hidden="true" />
 
-          {/* Brand */}
-          <div className="lg:col-span-2">
-            <div className="flex items-center gap-2.5 mb-4 select-none">
-              <div className="w-7 h-7 rounded-lg bg-white flex items-center justify-center">
-                <span className="text-black font-black text-xs">N</span>
-              </div>
-              <span className="font-bold text-white text-base tracking-tight">
-                Nabi<span className="text-white/40">Tech</span>
+      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8">
+        {/* Top bar — large editorial statement */}
+        <div className="py-16 sm:py-20 border-b border-white/[0.07]">
+          <p className="text-[11px] uppercase tracking-[0.2em] text-white/25 font-medium mb-6">
+            Based in Dire Dawa, Ethiopia
+          </p>
+          <h2
+            className="text-white font-bold leading-none"
+            style={{ fontSize: "clamp(2.8rem, 7vw, 6rem)", letterSpacing: "-0.04em", lineHeight: "0.92" }}
+          >
+            Let&apos;s build<br />
+            <span className="text-white/20">something</span> real.
+          </h2>
+          <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-3 bg-white text-black text-[11px] font-semibold uppercase tracking-[0.14em] px-6 py-3.5 hover:bg-white/90 transition-all active:scale-[0.98]"
+            >
+              Start a project
+              <svg className="w-3.5 h-3.5" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </Link>
+            <a
+              href="mailto:hello@nabitech.et"
+              className="text-[11px] uppercase tracking-[0.14em] text-white/40 hover:text-white transition-colors font-medium border-b border-white/20 hover:border-white pb-0.5"
+            >
+              hello@nabitech.et
+            </a>
+          </div>
+        </div>
+
+        {/* Links grid */}
+        <div className="py-12 grid grid-cols-2 sm:grid-cols-4 gap-8">
+          {/* Brand column */}
+          <div className="col-span-2 sm:col-span-1">
+            <Link href="/" className="flex items-center gap-2.5 mb-4 group" aria-label="NabiTech home">
+              <Image
+                src="/logo.svg"
+                alt="NabiTech"
+                width={24}
+                height={24}
+                className="w-6 h-6 object-contain invert opacity-80 group-hover:opacity-100 transition-opacity"
+              />
+              <span className="text-white/60 text-[11px] font-semibold uppercase tracking-[0.15em]">
+                NabiTech
               </span>
-            </div>
-            <p className="text-white/30 text-sm leading-relaxed max-w-xs">
-              Simple digital tools for local businesses in Ethiopia. Save time, respond faster, manage work better.
+            </Link>
+            <p className="text-white/25 text-xs leading-relaxed max-w-[180px]">
+              Digital tools for local businesses in Ethiopia.
             </p>
-            <div className="mt-5 flex items-center gap-4">
-              <a href="https://wa.me/your-number" className="text-xs text-white/40 hover:text-white transition-colors">
-                WhatsApp
-              </a>
-              <span className="text-white/10">·</span>
-              <a href="mailto:hello@nabitech.et" className="text-xs text-white/40 hover:text-white transition-colors">
-                hello@nabitech.et
-              </a>
-              <span className="text-white/10">·</span>
-              <span className="text-xs text-white/40">Dire Dawa, Ethiopia</span>
-            </div>
           </div>
 
           {/* Pages */}
           <div>
-            <h4 className="text-white/60 text-xs font-semibold uppercase tracking-widest mb-4">Pages</h4>
-            <ul className="space-y-2.5">
-              {[
-                ["Home", "/"],
-                ["About", "/about"],
-                ["Services", "/services"],
-                ["Demos", "/demos"],
-                ["Pricing", "/pricing"],
-                ["Contact", "/contact"],
-              ].map(([label, href]) => (
+            <h4 className="label-sm text-white/30 mb-5">Pages</h4>
+            <ul className="space-y-3">
+              {pages.map(([label, href]) => (
                 <li key={href}>
-                  <Link href={href} className="text-white/30 text-sm hover:text-white transition-colors">
+                  <Link
+                    href={href}
+                    className="text-[11px] text-white/35 hover:text-white transition-colors uppercase tracking-[0.1em]"
+                  >
                     {label}
                   </Link>
                 </li>
@@ -55,32 +97,46 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="text-white/60 text-xs font-semibold uppercase tracking-widest mb-4">Services</h4>
-            <ul className="space-y-2.5">
-              {[
-                "Business Websites",
-                "WhatsApp Automation",
-                "Booking Systems",
-                "CRM & Tracking",
-                "Inventory Systems",
-                "Custom AI Tools",
-              ].map((s) => (
+            <h4 className="label-sm text-white/30 mb-5">Services</h4>
+            <ul className="space-y-3">
+              {services.map((s) => (
                 <li key={s}>
-                  <Link href="/services" className="text-white/30 text-sm hover:text-white transition-colors">
+                  <Link
+                    href="/services"
+                    className="text-[11px] text-white/35 hover:text-white transition-colors uppercase tracking-[0.1em]"
+                  >
                     {s}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
+
+          {/* Contact */}
+          <div>
+            <h4 className="label-sm text-white/30 mb-5">Contact</h4>
+            <ul className="space-y-3 text-[11px] uppercase tracking-[0.1em]">
+              <li>
+                <a href="https://wa.me/your-number" className="text-white/35 hover:text-white transition-colors">
+                  WhatsApp
+                </a>
+              </li>
+              <li>
+                <a href="mailto:hello@nabitech.et" className="text-white/35 hover:text-white transition-colors">
+                  Email
+                </a>
+              </li>
+              <li className="text-white/20">Dire Dawa, ET</li>
+            </ul>
+          </div>
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 pt-6 border-t border-white/[0.05] flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-white/20 text-xs" suppressHydrationWarning>
-            &copy; {new Date().getFullYear()} NabiTech. All rights reserved.
+        <div className="py-5 border-t border-white/[0.07] flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="label-sm text-white/15" suppressHydrationWarning>
+            &copy; {new Date().getFullYear()} NabiTech
           </p>
-          <p className="text-white/20 text-xs">Built in Dire Dawa, Ethiopia <span aria-hidden="true">🇪🇹</span></p>
+          <p className="label-sm text-white/15">Dire Dawa, Ethiopia</p>
         </div>
       </div>
     </footer>
