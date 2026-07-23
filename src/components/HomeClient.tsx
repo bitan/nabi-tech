@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { ArrowRight, ExternalLink, CheckCircle2 } from "lucide-react";
@@ -66,7 +66,7 @@ export default function HomeClient() {
 
       {/* Trust strip */}
       <section aria-label="What we help with" className="relative bg-[#080808] py-14 px-5 sm:px-8 overflow-hidden">
-        <DotPattern className="text-white/[0.035] [mask-image:radial-gradient(ellipse_at_center,white_30%,transparent_75%)]" />
+        <DotPattern className="absolute text-white/[0.035] [mask-image:radial-gradient(ellipse_at_center,white_30%,transparent_75%)]" />
         <BlurFade delay={0.1}>
           <div className="max-w-3xl mx-auto text-center">
             <p className="text-white/25 text-xs uppercase tracking-[0.2em] font-medium mb-5">
@@ -89,7 +89,7 @@ export default function HomeClient() {
 
       {/* Stats */}
       <section aria-label="Key statistics" className="relative bg-[#080808] py-16 px-5 sm:px-8 overflow-hidden">
-        <DotPattern className="text-white/[0.03] [mask-image:radial-gradient(ellipse_at_center,white_40%,transparent_80%)]" />
+        <DotPattern className="absolute text-white/[0.03] [mask-image:radial-gradient(ellipse_at_center,white_40%,transparent_80%)]" />
         <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
           {stats.map((s, i) => (
             <BlurFade key={s.label} delay={0.1 + i * 0.1}>
@@ -108,7 +108,7 @@ export default function HomeClient() {
 
       {/* Services */}
       <section aria-labelledby="services-heading" className="relative bg-[#080808] py-24 px-5 sm:px-8 overflow-hidden">
-        <DotPattern className="text-white/[0.025] [mask-image:radial-gradient(ellipse_80%_60%_at_50%_0%,white_40%,transparent_100%)]" />
+        <DotPattern className="absolute text-white/[0.025] [mask-image:radial-gradient(ellipse_80%_60%_at_50%_0%,white_40%,transparent_100%)]" />
         <div className="max-w-6xl mx-auto">
           <BlurFade delay={0.05}>
             <div className="mb-14">
@@ -151,7 +151,7 @@ export default function HomeClient() {
 
       {/* Why Nabi Tech */}
       <section aria-labelledby="why-heading" className="relative bg-[#080808] py-24 px-5 sm:px-8 overflow-hidden">
-        <DotPattern className="text-white/[0.025] [mask-image:radial-gradient(ellipse_at_right,white_20%,transparent_70%)]" />
+        <DotPattern className="absolute text-white/[0.025] [mask-image:radial-gradient(ellipse_at_right,white_20%,transparent_70%)]" />
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <BlurFade delay={0.05}>
             <div>
@@ -180,7 +180,7 @@ export default function HomeClient() {
 
       {/* Demo Previews */}
       <section aria-labelledby="demos-heading" className="relative bg-[#080808] py-24 px-5 sm:px-8 overflow-hidden">
-        <DotPattern className="text-white/[0.025] [mask-image:radial-gradient(ellipse_at_left,white_20%,transparent_70%)]" />
+        <DotPattern className="absolute text-white/[0.025] [mask-image:radial-gradient(ellipse_at_left,white_20%,transparent_70%)]" />
         <div className="max-w-6xl mx-auto">
           <BlurFade delay={0.05}>
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-14">
@@ -235,7 +235,7 @@ export default function HomeClient() {
 
       {/* CTA Banner */}
       <section aria-labelledby="cta-heading" className="relative bg-[#080808] py-24 px-5 sm:px-8 overflow-hidden">
-        <DotPattern className="text-white/[0.02] [mask-image:radial-gradient(ellipse_at_center,white_30%,transparent_70%)]" />
+        <DotPattern className="absolute text-white/[0.02] [mask-image:radial-gradient(ellipse_at_center,white_30%,transparent_70%)]" />
         <div className="max-w-4xl mx-auto">
           <BlurFade delay={0.05}>
             <div className="relative rounded-3xl border border-white/[0.08] bg-white/[0.02] overflow-hidden px-8 sm:px-16 py-16 text-center">
@@ -260,3 +260,5 @@ export default function HomeClient() {
     </>
   );
 }
+
+
