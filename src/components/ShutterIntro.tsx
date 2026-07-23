@@ -11,18 +11,18 @@ const LINES = [
   { text: "Ethiopia.", delay: 0.70 },
 ];
 
-const AUTO_DISMISS_MS = (LINES[LINES.length - 1].delay + 1.4 + 0.8) * 1000;
+const HOLD_MS   = (LINES[LINES.length - 1].delay + 1.4) * 1000;
+const EXIT_MS   = 900; // how long the curtain-lift takes
+const AUTO_MS   = HOLD_MS + EXIT_MS;
 
-// useLayoutEffect on client, useEffect on server (avoids SSR warning)
 const useIsomorphicLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 export default function ShutterIntro() {
-  // Start as TRUE — blocks the page immediately, before any paint
-  const [visible, setVisible] = useState(true);
-  const [leaving, setLeaving] = useState(false);
+  const [visible,  setVisible]  = useState(true);
+  const [leaving,  setLeaving]  = useState(false);
 
-  // Run synchronously before first paint to hide the overlay if already seen
+  // Block the page immediately — remove overlay if already seen
   useIsomorphicLayoutEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced || sessionStorage.getItem(STORAGE_KEY)) {
@@ -36,14 +36,13 @@ export default function ShutterIntro() {
     setTimeout(() => {
       setVisible(false);
       sessionStorage.setItem(STORAGE_KEY, "1");
-    }, 800);
+    }, EXIT_MS + 100);
   }
 
-  // Auto-dismiss
   useEffect(() => {
     if (!visible || leaving) return;
-    const timer = setTimeout(dismiss, AUTO_DISMISS_MS);
-    return () => clearTimeout(timer);
+    const t = setTimeout(dismiss, HOLD_MS);
+    return () => clearTimeout(t);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visible]);
 
@@ -52,11 +51,16 @@ export default function ShutterIntro() {
       {visible && (
         <motion.div
           key="shutter-intro"
-          initial={{ opacity: 1 }}
-          animate={{ opacity: leaving ? 0 : 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
           className="fixed inset-0 z-[9999] bg-[#080808] flex flex-col items-center justify-center overflow-hidden"
+          /* --- ENTRY: instant (already visible from SSR) --- */
+          initial={{ y: "0%", opacity: 1 }}
+          /* --- EXIT: slide the whole panel upward and fade --- */
+          animate={leaving ? { y: "-100%", opacity: 0.6 } : { y: "0%", opacity: 1 }}
+          transition={
+            leaving
+              ? { duration: EXIT_MS / 1000, ease: [0.76, 0, 0.24, 1] }
+              : { duration: 0 }
+          }
           role="dialog"
           aria-modal="true"
           aria-label="NabiTech intro"
@@ -101,16 +105,12 @@ export default function ShutterIntro() {
                 <motion.p
                   className="text-[14vw] sm:text-[11vw] md:text-[9vw] lg:text-[8vw] font-extrabold tracking-tighter text-white leading-none"
                   initial={{ y: "105%", opacity: 0 }}
-                  animate={
-                    leaving
-                      ? { y: "-105%", opacity: 0 }
-                      : { y: "0%",    opacity: 1 }
-                  }
-                  transition={
-                    leaving
-                      ? { duration: 0.5, ease: [0.55, 0, 1, 0.45], delay: delay * 0.3 }
-                      : { duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.2 + delay }
-                  }
+                  animate={{ y: "0%", opacity: 1 }}
+                  transition={{
+                    duration: 0.65,
+                    ease: [0.22, 1, 0.36, 1],
+                    delay: 0.2 + delay,
+                  }}
                 >
                   {text}
                 </motion.p>
@@ -121,12 +121,8 @@ export default function ShutterIntro() {
             <motion.p
               className="text-white/35 text-sm sm:text-base font-light tracking-[0.2em] uppercase mt-6"
               initial={{ opacity: 0, filter: "blur(6px)" }}
-              animate={
-                leaving
-                  ? { opacity: 0, filter: "blur(6px)" }
-                  : { opacity: 1, filter: "blur(0px)" }
-              }
-              transition={{ delay: leaving ? 0 : 1.4, duration: 0.7 }}
+              animate={{ opacity: 1, filter: "blur(0px)" }}
+              transition={{ delay: 1.4, duration: 0.7 }}
             >
               Digital tools for local businesses
             </motion.p>
@@ -149,7 +145,7 @@ export default function ShutterIntro() {
             className="absolute bottom-0 left-0 h-[1.5px] bg-white/20"
             initial={{ width: "0%" }}
             animate={{ width: "100%" }}
-            transition={{ duration: AUTO_DISMISS_MS / 1000, ease: "linear" }}
+            transition={{ duration: HOLD_MS / 1000, ease: "linear" }}
             aria-hidden="true"
           />
         </motion.div>
