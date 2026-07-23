@@ -3,8 +3,10 @@ import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import IntroSplash from "@/components/IntroSplash";
 import ShutterIntro from "@/components/ShutterIntro";
 import PageReveal from "@/components/PageReveal";
+import { DotPattern } from "@/components/ui/dot-pattern";
 import { buildMetadata } from "@/lib/metadata";
 import { organizationSchema, localBusinessSchema } from "@/lib/schema";
 import "./globals.css";
@@ -33,7 +35,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
         />
       </head>
-      <body className="min-h-full flex flex-col bg-black">
+      <body className="min-h-full flex flex-col bg-[#080808]">
+        {/* Global dot pattern — sits behind everything */}
+        <DotPattern className="fixed text-white/[0.12] [mask-image:radial-gradient(ellipse_100%_100%_at_50%_0%,white_40%,transparent_100%)]" cr={1.5} width={24} height={24} />
         <ShutterIntro />
         <Navbar />
         <PageReveal>

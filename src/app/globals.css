@@ -1,41 +1,23 @@
 ﻿@import "tailwindcss";
 
-/* =========================================================================
-   NABITECH DESIGN SYSTEM — Editorial Black / Monochrome
-   Mood: High-end agency, cinematic, "clarity is a deletion process"
-   ========================================================================= */
-
-/* --- Tokens -------------------------------------------------------------- */
+/* --- CSS custom properties — black & gray palette ----------------------- */
 :root {
-  --black:   #000000;
-  --white:   #ffffff;
-  --off-white: #f0ede8;
-  --gray-950: #080808;
-  --gray-900: #0f0f0f;
-  --gray-800: #1a1a1a;
-  --gray-700: #2a2a2a;
-  --gray-600: #3d3d3d;
-  --gray-400: #737373;
-  --gray-300: #a3a3a3;
-  --gray-200: #d4d4d4;
+  --background: #080808;
+  --foreground: #e5e5e5;
 
-  /* Semantic tokens */
-  --background:          var(--black);
-  --foreground:          var(--off-white);
-  --primary:             var(--white);
-  --primary-foreground:  var(--black);
-  --muted:               var(--gray-900);
-  --muted-foreground:    var(--gray-400);
-  --card:                var(--gray-900);
-  --card-foreground:     var(--off-white);
-  --border:              var(--gray-800);
-  --border-subtle:       rgba(255,255,255,0.07);
+  --primary: #d4d4d4;
+  --primary-foreground: #080808;
 
-  /* Editorial grid line color */
-  --grid: rgba(255,255,255,0.06);
+  --muted: #171717;
+  --muted-foreground: #525252;
+
+  --card: #111111;
+  --card-foreground: #e5e5e5;
+
+  --border: #262626;
 }
 
-/* --- Tailwind v4 theme --------------------------------------------------- */
+/* --- Tailwind v4 theme mapping ------------------------------------------- */
 @theme inline {
   --color-background:         var(--background);
   --color-foreground:         var(--foreground);
@@ -52,95 +34,13 @@
   --font-serif: var(--font-playfair);
 }
 
-/* --- Reset --------------------------------------------------------------- */
-*, *::before, *::after { box-sizing: border-box; margin: 0; }
-
-html {
-  scroll-behavior: smooth;
-  background: var(--black);
-}
+/* --- Base ---------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
 
 body {
-  background: var(--black);
+  background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-feature-settings: "kern" 1, "liga" 1;
-  /* Subtle film grain noise overlay */
-  position: relative;
 }
 
-/* Film grain texture — matches mood board's grainy texture aesthetic */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 9998;
-  pointer-events: none;
-  opacity: 0.025;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 128px 128px;
-  mix-blend-mode: overlay;
-}
-
-/* --- Scrollbar ----------------------------------------------------------- */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: #000; }
-::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: #3d3d3d; }
-
-/* --- Selection ---------------------------------------------------------- */
-::selection { background: #fff; color: #000; }
-
-/* --- Typography scale ---------------------------------------------------- */
-/* Large editorial headline — matches the "clarity is a deletion process" card */
-.editorial-xl {
-  font-size: clamp(3.5rem, 10vw, 9rem);
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  line-height: 0.92;
-}
-
-.editorial-lg {
-  font-size: clamp(2.5rem, 6vw, 5.5rem);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 0.95;
-}
-
-/* Label / overline style — matches the uppercase tracking labels in mood board */
-.label-sm {
-  font-size: 0.65rem;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-
-/* --- Utility classes ----------------------------------------------------- */
-
-/* The editorial grid background seen in mood board top-left panel */
-.grid-bg {
-  background-image:
-    linear-gradient(var(--grid) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-  background-size: 64px 64px;
-}
-
-/* Card style matching mood board — dark surface with thin border */
-.card-editorial {
-  background: var(--gray-900);
-  border: 1px solid var(--gray-800);
-  position: relative;
-  overflow: hidden;
-}
-
-/* Glow orb — soft white glow like in mood board bottom-left */
-.glow-orb {
-  position: absolute;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
-  filter: blur(60px);
-  pointer-events: none;
-}
