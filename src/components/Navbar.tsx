@@ -65,7 +65,7 @@ export default function Navbar() {
           >
             <div className="relative w-8 h-8 flex items-center justify-center">
               <Image
-                src="/logo.svg"
+                src="/logo.svg.png"
                 alt="NabiTech logo mark"
                 width={32}
                 height={32}
@@ -227,3 +227,4 @@ export default function Navbar() {
     </>
   );
 }
+

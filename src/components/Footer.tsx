@@ -63,7 +63,7 @@ export default function Footer() {
           <div className="col-span-2 sm:col-span-1">
             <Link href="/" className="flex items-center gap-2.5 mb-4 group" aria-label="NabiTech home">
               <Image
-                src="/logo.svg"
+                src="/logo.svg.png"
                 alt="NabiTech"
                 width={24}
                 height={24}
@@ -142,3 +142,4 @@ export default function Footer() {
     </footer>
   );
 }
+
