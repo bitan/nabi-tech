@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import IntroSplash from "@/components/IntroSplash";
+import ShutterIntro from "@/components/ShutterIntro";
 import { buildMetadata } from "@/lib/metadata";
 import { organizationSchema, localBusinessSchema } from "@/lib/schema";
 import "./globals.css";
@@ -33,7 +34,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         />
       </head>
       <body className="min-h-full flex flex-col bg-[#080808]">
-        <IntroSplash />
+        <ShutterIntro />
         <Navbar />
         <main id="main-content" className="flex-1">{children}</main>
         <Footer />
